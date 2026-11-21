@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101522"><meta name="description" content="EQ PROJECT - Ultimate Audio Equalizer">
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg">
+<title>EQ PROJECT — Ultimate Audio</title>
+<style>
+:root{color-scheme:dark;--bg:#0c1220;--panel:#151f31;--panel2:#1c2a40;--line:#2b3b55;--txt:#eef5ff;--muted:#9eb0ca;--blue:#52c5ff;--purple:#9b83ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,#1d3150 0,transparent 35%),var(--bg);color:var(--txt);font:15px system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:18px 16px 12px;display:flex;align-items:center;justify-content:space-between;max-width:900px;margin:auto}
+.brand{display:flex;gap:11px;align-items:center}.logo{width:43px;height:43px;border-radius:14px;background:linear-gradient(135deg,#2563eb,#8b5cf6);display:grid;place-items:center;font-size:22px}.brand h1{font-size:19px;letter-spacing:1.2px;margin:0}.brand small{color:var(--muted);font-size:10px;letter-spacing:2px}
+.pill{border:1px solid #28664f;color:#76e5b2;background:#12352c;padding:6px 10px;border-radius:30px;font-size:11px}
+main{max-width:900px;margin:auto;padding:8px 14px 90px}.hero{padding:20px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,#17263c,#121a2b);margin-bottom:14px}.hero h2{margin:0 0 5px;font-size:23px}.hero p{margin:0;color:var(--muted);font-size:13px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0}.cardhead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:14px}.card h3{font-size:14px;letter-spacing:.7px;margin:0}.sub{font-size:11px;color:var(--muted)}
+select,button,.filelabel{background:var(--panel2);border:1px solid var(--line);color:var(--txt);border-radius:11px;padding:10px 12px;font:inherit}
+button{cursor:pointer}button.primary{background:linear-gradient(110deg,#2563eb,#7548d8);border:0;font-weight:650}button:active{transform:scale(.98)}
+.bands{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:5px;height:205px;align-items:end}.band{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:7px;min-width:0}.band input{writing-mode:vertical-lr;direction:rtl;appearance:slider-vertical;width:25px;height:145px;accent-color:var(--blue);margin:0}.band output{font-size:10px;color:#b9d7ef}.band label{font-size:9px;color:var(--muted);white-space:nowrap}
+.controls{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.control{background:var(--panel2);padding:12px;border-radius:13px}.control label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:9px}.control input{width:100%;accent-color:var(--blue)}
+.presets{display:flex;gap:8px;flex-wrap:wrap}.presets button{font-size:12px;padding:8px 11px}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.row>*{flex:1}
+.player{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.player button{flex:0 0 auto}.player input[type=file]{display:none}.filelabel{display:inline-block;cursor:pointer;font-size:12px}.filename{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.switches{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.switch{background:var(--panel2);padding:12px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;font-size:12px}.switch input{accent-color:var(--blue);width:18px;height:18px}
+footer{text-align:center;color:#71839d;font-size:11px;padding:12px}
+@media(max-width:420px){.bands{gap:1px}.band input{width:20px}.band label{font-size:8px}.band output{font-size:9px}.card{padding:13px}.hero h2{font-size:20px}}
+</style></head>
+<body>
+<header><div class="brand"><div class="logo">♫</div><div><h1>EQ PROJECT</h1><small>ULTIMATE AUDIO SYSTEM</small></div></div><span class="pill">● AUDIO LAB</span></header>
+<main>
+<section class="hero"><h2>Shape Your Sound.</h2><p>Equalizer, bass control, dan studio effects dalam satu tempat.</p></section>
+<section class="card"><div class="cardhead"><h3>♫ MUSIC PLAYER</h3><span class="sub">Audio yang dipilih dari perangkat</span></div>
+<div class="player"><label class="filelabel" for="audioFile">Pilih file audio</label><input id="audioFile" type="file" accept="audio/*"><button id="play" class="primary">▶ Putar</button><button id="stop">■ Stop</button><span id="filename" class="filename">Belum ada audio dipilih</span></div><audio id="audio" controls style="width:100%;margin-top:13px"></audio></section>
+<section class="card"><div class="cardhead"><h3>10 BAND EQUALIZER</h3><select id="preset"><option value="custom">Custom</option><option value="flat">Flat</option><option value="rock">Rock</option><option value="pop">Pop</option><option value="jazz">Jazz</option><option value="dangdut">Dangdut</option><option value="reggae">Reggae</option><option value="edm">EDM</option><option value="vocal">Vocal</option></select></div>
+<div class="bands" id="bands"></div><div class="row" style="margin-top:15px"><button id="reset">Reset Flat</button><button id="save">Simpan Preset</button><select id="saved"><option value="">Preset tersimpan</option></select></div></section>
+<section class="card"><div class="cardhead"><h3>STUDIO CONTROL</h3><span class="sub">Atur sesuai selera</span></div><div class="controls">
+<div class="control"><label>Bass Boost <b id="bassVal">0 dB</b></label><input id="bass" type="range" min="0" max="12" value="0"></div>
+<div class="control"><label>Treble <b id="trebleVal">0 dB</b></label><input id="treble" type="range" min="-12" max="12" value="0"></div>
+<div class="control"><label>Output Volume <b id="volVal">100%</b></label><input id="volume" type="range" min="0" max="100" value="100"></div>
+<div class="control"><label>Virtualizer <b id="virtVal">0%</b></label><input id="virtual" type="range" min="0" max="100" value="0"></div>
+</div></section>
+<section class="card"><div class="cardhead"><h3>EFFECTS</h3><span class="sub">Efek audio eksperimental</span></div><div class="switches">
+<label class="switch">Bass enhancement <input id="bassOn" type="checkbox"></label>
+<label class="switch">3D stereo widen* <input id="wideOn" type="checkbox"></label>
+<label class="switch">Room reverb* <input id="reverbOn" type="checkbox"></label>
+<label class="switch">Loudness* <input id="loudOn" type="checkbox"></label>
+</div><p class="sub">*Efek lanjutan akan diaktifkan bertahap; kontrol dasar equalizer dan volume sudah tersedia.</p></section>
+<section class="card"><div class="cardhead"><h3>MY EQ SETTINGS</h3><span class="sub">Tersimpan di browser ini</span></div><div class="row"><button id="theme">Ganti Tema</button><button id="export">Ekspor Pengaturan</button><button id="importBtn">Impor Pengaturan</button><input id="importFile" type="file" accept="application/json" hidden></div></section>
+<footer>EQ PROJECT • Versi 1.0 • Audio diproses di browser perangkat</footer>
+</main>
+<script>
+const freqs=[32,64,125,250,500,1000,2000,4000,8000,16000], names=['32','64','125','250','500','1k','2k','4k','8k','16k'];
+const presets={flat:[0,0,0,0,0,0,0,0,0,0],rock:[5,4,3,1,-1,-1,2,4,5,5],pop:[-1,1,3,4,2,0,-1,-1,1,2],jazz:[3,2,1,2,-1,-1,0,2,3,4],dangdut:[5,4,2,0,-1,1,3,4,3,2],reggae:[4,3,1,-1,-2,0,2,3,3,2],edm:[5,4,2,0,-1,1,3,4,4,3],vocal:[-3,-2,-1,1,3,4,3,2,0,-1]};
+const bandsEl=document.querySelector('#bands');let filters=[],audioCtx,source,gain,low,high,wide=null,rev=null;
+freqs.forEach((f,i)=>{let wrap=document.createElement('div');wrap.className='band';wrap.innerHTML=`<output id="v${i}">0</output><input aria-label="${f} Hz" id="b${i}" type="range" min="-12" max="12" value="0" step="1"><label>${names[i]}</label>`;bandsEl.append(wrap);});
+const $=id=>document.getElementById(id);
+function setBand(i,v){$('b'+i).value=v;$('v'+i).textContent=(v>0?'+':'')+v;if(filters[i])filters[i].gain.value=+v}
+function setPreset(p){let a=presets[p]||presets.flat;a.forEach((v,i)=>setBand(i,v));$('preset').value=p}
+function initAudio(){if(audioCtx)return;let C=window.AudioContext||window.webkitAudioContext;if(!C){alert('Browser ini belum mendukung Web Audio API.');return}audioCtx=new C();source=audioCtx.createMediaElementSource($('audio'));filters=freqs.map((f,i)=>{let n=audioCtx.createBiquadFilter();n.type='peaking';n.frequency.value=f;n.Q.value=1;n.gain.value=+$('b'+i).value;return n});low=audioCtx.createBiquadFilter();low.type='lowshelf';low.frequency.value=100;high=audioCtx.createBiquadFilter();high.type='highshelf';high.frequency.value=6000;gain=audioCtx.createGain();let chain=[...filters,low,high,gain];source.connect(chain[0]);chain.forEach((n,i)=>{if(chain[i+1])n.connect(chain[i+1])});gain.connect(audioCtx.destination);applyControls()}
+function applyControls(){if(!audioCtx)return;low.gain.value=+$('bass').value;high.gain.value=+$('treble').value;gain.gain.value=+$('volume').value/100}
+freqs.forEach((_,i)=>$('b'+i).addEventListener('input',e=>{setBand(i,+e.target.value);$('preset').value='custom';if(filters[i])filters[i].gain.value=+e.target.value}));
+$('preset').onchange=e=>setPreset(e.target.value);$('reset').onclick=()=>setPreset('flat');
+['bass','treble','volume'].forEach(id=>$(id).oninput=e=>{$(id+'Val').textContent=id==='volume'?e.target.value+'%':e.target.value+' dB';applyControls()});
+$('virtual').oninput=e=>$('virtVal').textContent=e.target.value+'%';
+$('audioFile').onchange=e=>{let f=e.target.files[0];if(!f)return;$('audio').src=URL.createObjectURL(f);$('filename').textContent=f.name;initAudio()};
+$('play').onclick=async()=>{if(!$('audio').src){alert('Pilih file audio terlebih dahulu.');return}initAudio();if(audioCtx.state==='suspended')await audioCtx.resume();$('audio').play()};
+$('stop').onclick=()=>{$('audio').pause();$('audio').currentTime=0};
+$('bassOn').onchange=e=>{$('bass').value=e.target.checked?6:0;$('bass').dispatchEvent(new Event('input'))};
+$('save').onclick=()=>{let name=prompt('Nama preset:');if(!name)return;let data=JSON.parse(localStorage.eqPresets||'{}');data[name]=freqs.map((_,i)=>+$('b'+i).value);localStorage.eqPresets=JSON.stringify(data);refreshSaved()};
+function refreshSaved(){let data=JSON.parse(localStorage.eqPresets||'{}');$('saved').innerHTML='<option value="">Preset tersimpan</option>'+Object.keys(data).map(n=>`<option>${n.replace(/[&<>"']/g,'')}</option>`).join('')}
+$('saved').onchange=e=>{let a=JSON.parse(localStorage.eqPresets||'{}')[e.target.value];if(a)a.forEach((v,i)=>setBand(i,v))};
+$('theme').onclick=()=>{let light=document.body.dataset.light!=='1';document.body.dataset.light=light?'1':'0';document.body.style.setProperty('--bg',light?'#eaf0f8':'#0c1220');document.body.style.setProperty('--panel',light?'#fff':'#151f31');document.body.style.setProperty('--panel2',light?'#e8eef7':'#1c2a40');document.body.style.setProperty('--line',light?'#cbd5e1':'#2b3b55');document.body.style.setProperty('--txt',light?'#142033':'#eef5ff');document.body.style.setProperty('--muted',light?'#53647d':'#9eb0ca')};
+function settings(){return {bands:freqs.map((_,i)=>+$('b'+i).value),bass:+$('bass').value,treble:+$('treble').value,volume:+$('volume').value,presets:JSON.parse(localStorage.eqPresets||'{}')}}
+$('export').onclick=()=>{let blob=new Blob([JSON.stringify(settings(),null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='eq-project-settings.json';a.click();URL.revokeObjectURL(a.href)};
+$('importBtn').onclick=()=>$('importFile').click();$('importFile').onchange=async e=>{try{let d=JSON.parse(await e.target.files[0].text());if(d.bands?.length===10)d.bands.forEach((v,i)=>setBand(i,Math.max(-12,Math.min(12,+v))));['bass','treble','volume'].forEach(k=>{if(Number.isFinite(d[k])){$(k).value=d[k];$(k).dispatchEvent(new Event('input'))}});if(d.presets){localStorage.eqPresets=JSON.stringify(d.presets);refreshSaved()}}catch{alert('File pengaturan tidak valid')}};
+refreshSaved();if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script></body></html>
