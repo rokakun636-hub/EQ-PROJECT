@@ -1,153 +1,90 @@
 <!doctype html>
 <html lang="id">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#080d18">
-<title>EQ PROJECT 3.0 — Professional Audio Studio</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080d18"><title>EQ PROJECT 4.0 — Ultra Studio</title>
 <style>
-:root{--bg:#080d18;--panel:#111a2b;--panel2:#0c1423;--line:#26344d;--text:#edf4ff;--muted:#94a6c4;--accent:#42d6b5;--accent2:#60a5fa;--danger:#ff6b7a}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#17294a 0,#080d18 42%);color:var(--text);font:14px system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-header{padding:22px 16px 14px;text-align:center}h1{margin:0;font-size:clamp(23px,6vw,34px);letter-spacing:1.5px}header p{margin:7px 0 0;color:var(--muted)}
-main{max-width:1100px;margin:auto;padding:0 12px 32px}.panel{background:linear-gradient(145deg,rgba(20,31,51,.97),rgba(12,20,35,.97));border:1px solid var(--line);border-radius:17px;padding:15px;margin:12px 0;box-shadow:0 10px 30px #0004}
-h2{font-size:16px;margin:0 0 13px;color:#dceaff;display:flex;align-items:center;gap:8px}.tag{font-size:10px;color:#07151a;background:var(--accent);padding:4px 7px;border-radius:20px;font-weight:800}
-button,.filelabel,select{background:#1a2942;color:var(--text);border:1px solid #354967;border-radius:10px;padding:10px 13px;font:inherit}
-button{cursor:pointer}button.primary{background:var(--accent);color:#06201b;border:0;font-weight:800}button:active{transform:scale(.98)}button:disabled{opacity:.4}
-.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.grow{flex:1;min-width:180px}input[type=file]{display:none}
-#trackName{font-weight:700;overflow-wrap:anywhere}.sub{color:var(--muted);font-size:12px;margin-top:4px}
-audio{display:none}.transport{display:flex;gap:8px;align-items:center;margin-top:12px}.transport button{min-width:46px}
-canvas{width:100%;height:145px;background:#060b13;border:1px solid #1e2b42;border-radius:12px;display:block}
-#spectrum{height:180px}.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.control{background:var(--panel2);padding:12px;border:1px solid #1d2b42;border-radius:12px}.control label{display:flex;justify-content:space-between;gap:8px;color:#cfe0fa;font-size:12px;margin-bottom:9px}
-input[type=range]{width:100%;accent-color:var(--accent)}
-.eqgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
-.band{background:#0b1321;border:1px solid #1d2b42;border-radius:10px;padding:8px 5px;text-align:center;min-width:0}
-.band input{display:block;writing-mode:vertical-lr;direction:rtl;appearance:slider-vertical;width:100%;height:112px;margin:5px auto;accent-color:var(--accent)}
-.band strong{display:block;font-size:11px}.band small{color:var(--muted);font-size:10px}
-.presetgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.presetgrid button{padding:10px 5px;font-size:12px}
-.status{color:var(--muted);font-size:12px;margin-top:9px;min-height:16px}
-.note{color:var(--muted);font-size:12px;line-height:1.55}
-footer{text-align:center;color:#7184a4;font-size:11px;padding:10px}
-@media(min-width:700px){.controls{grid-template-columns:repeat(4,minmax(0,1fr))}.eqgrid{grid-template-columns:repeat(10,minmax(0,1fr))}.band input{height:135px}.presetgrid{grid-template-columns:repeat(6,minmax(0,1fr))}}
-@media(max-width:360px){.eqgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.presetgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-</style>
-</head>
+:root{--bg:#080d18;--panel:#111b2d;--panel2:#0b1423;--line:#293a56;--txt:#edf4ff;--muted:#91a5c4;--a:#42d6b5;--b:#60a5fa}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0,#1a3155 0,#080d18 48%);color:var(--txt);font:14px system-ui,Arial,sans-serif}header{text-align:center;padding:22px 12px 12px}h1{font-size:clamp(24px,6vw,36px);margin:0;letter-spacing:1px}header p{color:var(--muted);margin:6px 0}main{max-width:1100px;margin:auto;padding:0 12px 28px}.panel{background:linear-gradient(145deg,#142139ee,#0c1525ee);border:1px solid var(--line);border-radius:16px;padding:14px;margin:12px 0;box-shadow:0 10px 28px #0004}h2{font-size:16px;margin:0 0 12px}.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.grow{flex:1;min-width:150px}button,.filelabel,select,input[type=search],input[type=text]{border:1px solid #3a506f;background:#1a2a45;color:var(--txt);padding:10px 12px;border-radius:10px;font:inherit}button,.filelabel{cursor:pointer}button.primary,.filelabel.primary{background:var(--a);color:#052019;border:0;font-weight:800}button:active{transform:scale(.98)}input[type=file]{display:none}.muted,.status,.help{color:var(--muted);font-size:12px}.status{min-height:17px;margin-top:8px}audio{display:none}canvas{display:block;width:100%;height:155px;background:#050a12;border:1px solid #20304a;border-radius:10px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.control{background:var(--panel2);border:1px solid #1d2d46;border-radius:11px;padding:10px}.control label{display:flex;justify-content:space-between;gap:6px;font-size:12px;margin-bottom:7px}.control input{width:100%;accent-color:var(--a)}.eqgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}.band{background:#091221;border:1px solid #20304a;border-radius:9px;text-align:center;padding:7px 3px}.band strong{font-size:10px;display:block}.band input{display:block;writing-mode:vertical-lr;direction:rtl;appearance:slider-vertical;height:105px;width:100%;margin:5px auto;accent-color:var(--a)}.band small{font-size:10px;color:var(--muted)}.playlist{max-height:220px;overflow:auto;margin-top:10px}.track{display:flex;gap:8px;align-items:center;padding:8px;border-bottom:1px solid #26364f}.track button{padding:7px 9px}.track.active{background:#18344a}.track .name{flex:1;min-width:0;overflow-wrap:anywhere}.presets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.presets button{font-size:12px;padding:9px 4px}.badge{font-size:10px;color:#08201a;background:var(--a);border-radius:20px;padding:4px 7px;font-weight:800}.transport button{min-width:45px}.footer{text-align:center;color:#7185a5;font-size:11px;padding:12px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.eqgrid{grid-template-columns:repeat(10,minmax(0,1fr))}.band input{height:130px}.presets{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media(max-width:360px){.eqgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.presets{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style></head>
 <body>
-<header><h1>EQ PROJECT <span style="color:var(--accent)">3.0</span></h1><p>Professional Audio Studio • 30 Band • Real-time Processing</p></header>
+<header><h1>EQ PROJECT <span style="color:var(--a)">4.0</span></h1><p>ULTRA STUDIO • 30 BAND • PLAYLIST • EFFECTS RACK</p></header>
 <main>
-<section class="panel">
-<h2>🎵 Pemutar Musik <span class="tag">LOCAL AUDIO</span></h2>
-<div class="row">
-<label class="filelabel primary" for="files">＋ Pilih Musik</label><input id="files" type="file" accept="audio/*" multiple>
-<div class="grow"><div id="trackName">Belum ada musik dipilih</div><div class="sub" id="trackInfo">Pilih file audio dari perangkat Android</div></div>
-</div>
-<div class="transport">
-<button id="prev" aria-label="Sebelumnya">⏮</button><button class="primary" id="play" aria-label="Putar">▶ Putar</button><button id="stop">■ Stop</button><button id="next" aria-label="Berikutnya">⏭</button>
-</div>
-<audio id="audio" preload="metadata"></audio><div class="status" id="playerStatus">Siap memilih file audio.</div>
-</section>
-<section class="panel"><h2>📊 Spectrum Analyzer <span class="tag">LIVE</span></h2><canvas id="spectrum" width="1000" height="260"></canvas><p class="note">Visualisasi frekuensi real-time dari audio yang sedang diputar.</p></section>
-<section class="panel"><h2>🎚️ 30-Band Professional Equalizer</h2>
-<div class="row" style="margin-bottom:12px"><button id="flat">Reset Flat</button><button id="eqOn" class="primary">EQ ON</button><span class="sub">Rentang tiap band: −12 dB hingga +12 dB</span></div>
-<div class="eqgrid" id="eqGrid"></div>
-</section>
-<section class="panel"><h2>🎛️ Preset Studio</h2><div class="presetgrid" id="presets"></div><div class="row" style="margin-top:12px"><input id="presetName" class="grow" placeholder="Nama preset baru" style="min-width:120px;background:#0b1321;color:white;border:1px solid #354967;border-radius:9px;padding:10px"><button id="savePreset">Simpan Preset</button><button id="exportPreset">Ekspor</button><label class="filelabel" for="importPreset">Impor</label><input id="importPreset" type="file" accept="application/json,.json"></div><div class="status" id="presetStatus"></div></section>
-<section class="panel"><h2>🔊 Audio Enhancer</h2><div class="controls">
-<div class="control"><label for="bass">Bass Boost <b id="bassVal">0 dB</b></label><input id="bass" type="range" min="-12" max="12" value="0" step="1"></div>
-<div class="control"><label for="treble">Treble <b id="trebleVal">0 dB</b></label><input id="treble" type="range" min="-12" max="12" value="0" step="1"></div>
-<div class="control"><label for="width">Stereo Width <b id="widthVal">100%</b></label><input id="width" type="range" min="0" max="150" value="100" step="1"></div>
-<div class="control"><label for="reverb">Reverb Mix <b id="reverbVal">0%</b></label><input id="reverb" type="range" min="0" max="35" value="0" step="1"></div>
-<div class="control"><label for="comp">Compressor <b id="compVal">OFF</b></label><input id="comp" type="range" min="0" max="100" value="0" step="1"></div>
-<div class="control"><label for="volume">Master Volume <b id="volumeVal">80%</b></label><input id="volume" type="range" min="0" max="100" value="80" step="1"></div>
-</div><p class="note">Stereo Width memperlebar atau mempersempit citra stereo. Compressor mengurangi dinamika berlebih. Limiter pengaman puncak sinyal selalu aktif; hindari volume terlalu tinggi.</p></section>
-<section class="panel"><h2>⚙️ Pengaturan</h2><div class="row"><button id="theme">🌙 Tema</button><button id="downloadHelp">Petunjuk penggunaan</button></div><div class="status" id="systemStatus">Audio engine akan dibuat saat tombol Putar ditekan.</div></section>
-<footer>EQ PROJECT 3.0 • Pemrosesan audio berjalan di browser perangkat Anda.</footer>
+<section class="panel"><h2>🎵 Smart Music Library <span class="badge">LOCAL</span></h2>
+<div class="row"><label class="filelabel primary" for="files">＋ Tambah Musik</label><input id="files" type="file" accept="audio/*" multiple><input id="search" type="search" placeholder="Cari lagu..." class="grow"><span class="muted" id="count">0 lagu</span></div>
+<div class="row" style="margin-top:12px"><div class="grow"><b id="current">Belum ada lagu dipilih</b><div class="muted" id="meta">Pilih file audio dari perangkat</div></div></div>
+<div class="row transport" style="margin-top:10px"><button id="prev">⏮</button><button id="play" class="primary">▶ Putar</button><button id="stop">■ Stop</button><button id="next">⏭</button><span class="muted" id="time">00:00 / 00:00</span></div>
+<div class="row" style="margin-top:9px"><input id="seek" type="range" min="0" max="1000" value="0" style="width:100%;accent-color:var(--a)"></div><div id="playlist" class="playlist"></div><audio id="audio" preload="metadata"></audio><div id="playerStatus" class="status">Siap.</div></section>
+<section class="panel"><h2>📈 Advanced Analyzer</h2><canvas id="visual" width="1000" height="260"></canvas><p class="help">Spektrum frekuensi dan bentuk gelombang real-time. Tampilan bergerak saat musik diputar.</p></section>
+<section class="panel"><h2>🎚️ 30-Band Equalizer</h2><div class="row" style="margin-bottom:10px"><button id="flat">Reset Flat</button><button id="bypass" class="primary">EQ ON</button><span class="muted">−12 dB sampai +12 dB</span></div><div class="eqgrid" id="eq"></div></section>
+<section class="panel"><h2>🎛️ Studio Effects Rack</h2><div class="grid">
+<div class="control"><label>Bass Boost <b id="bassV">0 dB</b></label><input id="bass" type="range" min="-12" max="12" value="0"></div>
+<div class="control"><label>Treble <b id="trebleV">0 dB</b></label><input id="treble" type="range" min="-12" max="12" value="0"></div>
+<div class="control"><label>Stereo Width <b id="widthV">100%</b></label><input id="width" type="range" min="0" max="150" value="100"></div>
+<div class="control"><label>Reverb <b id="reverbV">0%</b></label><input id="reverb" type="range" min="0" max="40" value="0"></div>
+<div class="control"><label>Delay / Echo <b id="delayV">0%</b></label><input id="delay" type="range" min="0" max="45" value="0"></div>
+<div class="control"><label>Compressor <b id="compV">OFF</b></label><input id="comp" type="range" min="0" max="100" value="0"></div>
+<div class="control"><label>Master Volume <b id="volumeV">80%</b></label><input id="volume" type="range" min="0" max="100" value="80"></div>
+</div><p class="help">Reverb memberi kesan ruang, Delay/Echo memberi pantulan suara, Stereo Width mengatur lebar stereo. Compressor mengendalikan dinamika; limiter pengaman puncak selalu aktif.</p></section>
+<section class="panel"><h2>💾 Preset Studio</h2><div id="presets" class="presets"></div><div class="row" style="margin-top:10px"><input id="presetName" type="text" placeholder="Nama preset baru" class="grow"><button id="save">Simpan</button><button id="export">Ekspor</button><label class="filelabel" for="import">Impor</label><input id="import" type="file" accept=".json,application/json"></div><div id="presetStatus" class="status"></div></section>
+<section class="panel"><h2>⚙️ Kontrol</h2><div class="row"><button id="theme">🌙 Ganti Tema</button><button id="helpBtn">Panduan Singkat</button><button id="clear">Kosongkan Playlist</button></div><div id="engineStatus" class="status">Audio engine dibuat saat tombol Putar ditekan.</div></section>
+<div class="footer">EQ PROJECT 4.0 • Audio diproses secara lokal di browser perangkat Anda.</div>
 </main>
 <script>
-(()=>{
-'use strict';
-const $=id=>document.getElementById(id);
-const freqs=[25,31.5,40,50,63,80,100,125,160,200,250,315,400,500,630,800,1000,1250,1600,2000,2500,3150,4000,5000,6300,8000,10000,12500,16000,20000];
-const labels=f=>f>=1000?(f/1000)+'k':String(f);
-let files=[],index=0,ctx=null,source=null,filters=[],bassNode=null,trebleNode=null,master=null,analyser=null,compressor=null,limiter=null;
-let split=null,merge=null,widthGains=[],reverbNode=null,reverbGain=null,dryGain=null,eqEnabled=true,raf=0;
-const audio=$('audio');
-const values=Array(30).fill(0);
-function buildBands(){
- $('eqGrid').innerHTML='';
- freqs.forEach((f,i)=>{let d=document.createElement('div');d.className='band';let lab=document.createElement('strong');lab.textContent=labels(f)+' Hz';let input=document.createElement('input');input.type='range';input.min=-12;input.max=12;input.step=0.5;input.value=0;input.title=labels(f)+' Hz';let val=document.createElement('small');val.textContent='0 dB';input.addEventListener('input',()=>{values[i]=+input.value;val.textContent=(values[i]>0?'+':'')+values[i]+' dB';applyBand(i)});d.append(lab,input,val);$('eqGrid').append(d)});
-}
-function createEngine(){
- if(ctx)return;
- const AC=window.AudioContext||window.webkitAudioContext;if(!AC){$('systemStatus').textContent='Browser tidak mendukung Web Audio API.';return}
- ctx=new AC();source=ctx.createMediaElementSource(audio);
- // Stereo width matrix. For mono input, browser supplies a compatible channel layout.
- split=ctx.createChannelSplitter(2);merge=ctx.createChannelMerger(2);
- const matrix=[ctx.createGain(),ctx.createGain(),ctx.createGain(),ctx.createGain()];widthGains=matrix;
- source.connect(split);
- matrix[0].connect(merge,0,0);matrix[1].connect(merge,0,0);matrix[2].connect(merge,0,1);matrix[3].connect(merge,0,1);
- split.connect(matrix[0],0);split.connect(matrix[1],1);split.connect(matrix[2],0);split.connect(matrix[3],1);
- setWidth(100);
- let node=merge;
- freqs.forEach((f,i)=>{let flt=ctx.createBiquadFilter();flt.type='peaking';flt.frequency.value=f;flt.Q.value=1.15;flt.gain.value=0;node.connect(flt);node=flt;filters.push(flt)});
- bassNode=ctx.createBiquadFilter();bassNode.type='lowshelf';bassNode.frequency.value=100;node.connect(bassNode);
- trebleNode=ctx.createBiquadFilter();trebleNode.type='highshelf';trebleNode.frequency.value=8000;bassNode.connect(trebleNode);
- compressor=ctx.createDynamicsCompressor();compressor.threshold.value=-24;compressor.knee.value=18;compressor.ratio.value=4;compressor.attack.value=.008;compressor.release.value=.18;
- trebleNode.connect(compressor);
- limiter=ctx.createDynamicsCompressor();limiter.threshold.value=-3;limiter.knee.value=0;limiter.ratio.value=20;limiter.attack.value=.003;limiter.release.value=.12;compressor.connect(limiter);
- master=ctx.createGain();master.gain.value=.8;limiter.connect(master);
- analyser=ctx.createAnalyser();analyser.fftSize=2048;analyser.smoothingTimeConstant=.82;master.connect(analyser);analyser.connect(ctx.destination);
- // Small generated impulse response for optional room ambience.
- const len=Math.floor(ctx.sampleRate*1.4),buf=ctx.createBuffer(2,len,ctx.sampleRate);
- for(let c=0;c<2;c++){let data=buf.getChannelData(c);for(let i=0;i<len;i++)data[i]=(Math.random()*2-1)*Math.pow(1-i/len,3)}
- reverbNode=ctx.createConvolver();reverbNode.buffer=buf;dryGain=ctx.createGain();reverbGain=ctx.createGain();dryGain.gain.value=1;reverbGain.gain.value=0;
- master.disconnect();master.connect(dryGain);dryGain.connect(analyser);master.connect(reverbNode);reverbNode.connect(reverbGain);reverbGain.connect(analyser);
- $('systemStatus').textContent='Audio engine aktif • EQ 30 band • Compressor • Limiter.';
-}
-function applyBand(i){if(filters[i])filters[i].gain.setTargetAtTime(eqEnabled?values[i]:0,ctx.currentTime,.025)}
-function setWidth(v){if(!ctx)return;let w=v/100;let a=.5*(1+w),b=.5*(1-w);widthGains[0].gain.setTargetAtTime(a,ctx.currentTime,.03);widthGains[1].gain.setTargetAtTime(b,ctx.currentTime,.03);widthGains[2].gain.setTargetAtTime(b,ctx.currentTime,.03);widthGains[3].gain.setTargetAtTime(a,ctx.currentTime,.03)}
-function update(id,fn){$(id).addEventListener('input',()=>{fn(+$ (id).value)})}
-function setSlider(id,v){$(id).value=v;$(id).dispatchEvent(new Event('input'))}
-update('bass',v=>{if(bassNode)bassNode.gain.setTargetAtTime(v,ctx.currentTime,.03);$('bassVal').textContent=(v>0?'+':'')+v+' dB'});
-update('treble',v=>{if(trebleNode)trebleNode.gain.setTargetAtTime(v,ctx.currentTime,.03);$('trebleVal').textContent=(v>0?'+':'')+v+' dB'});
-update('width',v=>{setWidth(v);$('widthVal').textContent=v+'%'});
-update('reverb',v=>{if(reverbGain)reverbGain.gain.setTargetAtTime(v/100,ctx.currentTime,.05);if(dryGain)dryGain.gain.setTargetAtTime(1-v/180,ctx.currentTime,.05);$('reverbVal').textContent=v+'%'});
-update('comp',v=>{if(compressor){compressor.threshold.setTargetAtTime(-10-v*.35,ctx.currentTime,.03);compressor.ratio.setTargetAtTime(1+v*.09,ctx.currentTime,.03)}$('compVal').textContent=v===0?'OFF':v+'%'});
-update('volume',v=>{if(master)master.gain.setTargetAtTime(v/100,ctx.currentTime,.03);$('volumeVal').textContent=v+'%'});
-function loadFileList(list){files=Array.from(list);index=0;if(!files.length)return;loadTrack()}
-function loadTrack(){let f=files[index];if(!f)return;audio.src=URL.createObjectURL(f);$('trackName').textContent=f.name;$('trackInfo').textContent=(f.size/1048576).toFixed(2)+' MB • '+(f.type||'Audio');$('playerStatus').textContent='File siap diputar.'}
-$('files').addEventListener('change',e=>loadFileList(e.target.files));
-audio.addEventListener('pause',()=>{$('play').textContent='▶ Putar'});
-audio.addEventListener('play',()=>{$('play').textContent='❚❚ Pause'});
-$('play').onclick=async()=>{if(!audio.src){$('playerStatus').textContent='Pilih file musik terlebih dahulu.';return}createEngine();await ctx.resume();if(audio.paused){try{await audio.play();draw()}catch(e){$('playerStatus').textContent='Gagal memutar file audio.'}}else audio.pause()};
-$('stop').onclick=()=>{audio.pause();audio.currentTime=0};
-$('prev').onclick=()=>{if(files.length){index=(index-1+files.length)%files.length;loadTrack();audio.play().catch(()=>{})}};
-$('next').onclick=()=>{if(files.length){index=(index+1)%files.length;loadTrack();audio.play().catch(()=>{})}};
-audio.addEventListener('ended',()=>{if(files.length>1){index=(index+1)%files.length;loadTrack();audio.play().catch(()=>{})}});
-function draw(){if(!analyser||audio.paused)return;let c=$('spectrum'),g=c.getContext('2d'),w=c.width,h=c.height,data=new Uint8Array(analyser.frequencyBinCount);analyser.getByteFrequencyData(data);g.clearRect(0,0,w,h);g.fillStyle='#060b13';g.fillRect(0,0,w,h);let bars=80,step=Math.floor(data.length/bars),bw=w/bars;for(let i=0;i<bars;i++){let v=data[i*step]/255,bar=v*(h-15);let grad=g.createLinearGradient(0,h-bar,0,h);grad.addColorStop(0,'#60a5fa');grad.addColorStop(1,'#42d6b5');g.fillStyle=grad;g.fillRect(i*bw+1,h-bar,bw-2,bar)}raf=requestAnimationFrame(draw)}
-$('eqOn').onclick=()=>{eqEnabled=!eqEnabled;$('eqOn').textContent=eqEnabled?'EQ ON':'EQ BYPASS';$('eqOn').classList.toggle('primary',eqEnabled);filters.forEach((_,i)=>applyBand(i))};
-function applyPreset(p){p.bands.forEach((v,i)=>{values[i]=v;let inp=$('eqGrid').children[i].querySelector('input');inp.value=v;inp.dispatchEvent(new Event('input'))});setSlider('bass',p.bass??0);setSlider('treble',p.treble??0);setSlider('width',p.width??100);setSlider('reverb',p.reverb??0);setSlider('comp',p.comp??0);$('presetStatus').textContent='Preset diterapkan: '+p.name}
-const builtin=[
-['Flat',0,0,0,100,0,0],['Rock', [4,4,3,2,1,0,-1,-1,0,1,2,3,3,2,1,2,3,4,4,3,2,2,3,4,4,3,2,2,1,0],0,1,110,4,25],
-['Pop', [ -1,0,1,2,3,3,2,1,0,-1,-1,0,1,2,3,3,2,1,0,1,2,3,3,2,1,0,-1,-1,0,0],0,2,105,5,20],
-['Jazz', [2,2,1,1,0,0,0,1,1,0,-1,-1,0,1,2,2,1,1,2,2,1,1,2,3,3,2,2,2,1,0],1,2,105,8,15],
-['Dangdut',[4,4,3,3,2,2,1,0,-1,-1,0,2,3,3,2,1,1,2,3,3,2,2,3,3,2,1,0,0,0,-1],3,2,110,8,30],
-['Reggae',[4,3,3,2,1,0,0,1,2,2,1,0,0,1,2,2,1,0,0,1,2,2,1,0,1,2,2,1,0,-1],3,0,115,10,20],
-['EDM',[5,5,4,4,3,2,1,0,-1,-2,-1,0,1,2,2,1,0,1,2,3,4,4,3,3,2,2,1,1,0,0],4,3,120,5,40],
-['Vocal',[-2,-2,-1,0,1,1,0,-1,-1,0,1,2,3,4,4,3,2,2,3,3,2,1,0,1,2,2,1,0,-1,-2],-2,3,100,8,35],
-['Acoustic',[2,2,1,1,0,0,-1,0,1,1,1,2,2,2,1,1,1,2,2,2,1,1,2,2,2,1,1,0,0,-1],1,2,105,12,15]
+(()=>{'use strict';
+const $=id=>document.getElementById(id),audio=$('audio');
+const hz=[25,31.5,40,50,63,80,100,125,160,200,250,315,400,500,630,800,1000,1250,1600,2000,2500,3150,4000,5000,6300,8000,10000,12500,16000,20000];
+const bands=Array(30).fill(0);let tracks=[],idx=-1,ctx=null,filters=[],bass=null,treble=null,master=null,analyser=null,comp=null,limiter=null,split=null,merger=null,mg=[],conv=null,revWet=null,revDry=null,delay=null,delayWet=null,delayDry=null,eqOn=true,raf=0,urls=[];
+const fmt=s=>{if(!isFinite(s))return'00:00';let m=Math.floor(s/60),v=Math.floor(s%60);return String(m).padStart(2,'0')+':'+String(v).padStart(2,'0')};
+function buildEQ(){hz.forEach((f,i)=>{let d=document.createElement('div');d.className='band';let l=document.createElement('strong');l.textContent=(f>=1000?(f/1000)+'k':f)+' Hz';let r=document.createElement('input');r.type='range';r.min=-12;r.max=12;r.step=.5;r.value=0;let v=document.createElement('small');v.textContent='0 dB';r.oninput=()=>{bands[i]=+r.value;v.textContent=(bands[i]>0?'+':'')+bands[i]+' dB';if(filters[i])filters[i].gain.setTargetAtTime(eqOn?bands[i]:0,ctx.currentTime,.025)};d.append(l,r,v);$('eq').append(d)})}
+function makeEngine(){if(ctx)return;let AC=window.AudioContext||window.webkitAudioContext;if(!AC){$('engineStatus').textContent='Browser tidak mendukung Web Audio API.';return}ctx=new AC();let src=ctx.createMediaElementSource(audio);
+split=ctx.createChannelSplitter(2);merger=ctx.createChannelMerger(2);mg=Array.from({length:4},()=>ctx.createGain());src.connect(split);mg[0].connect(merger,0,0);mg[1].connect(merger,0,0);mg[2].connect(merger,0,1);mg[3].connect(merger,0,1);split.connect(mg[0],0);split.connect(mg[1],1);split.connect(mg[2],0);split.connect(mg[3],1);setWidth(100);
+let n=merger;hz.forEach(f=>{let q=ctx.createBiquadFilter();q.type='peaking';q.frequency.value=f;q.Q.value=1.15;n.connect(q);n=q;filters.push(q)});
+bass=ctx.createBiquadFilter();bass.type='lowshelf';bass.frequency.value=100;n.connect(bass);treble=ctx.createBiquadFilter();treble.type='highshelf';treble.frequency.value=8000;bass.connect(treble);
+comp=ctx.createDynamicsCompressor();comp.threshold.value=-24;comp.knee.value=18;comp.ratio.value=4;comp.attack.value=.008;comp.release.value=.18;treble.connect(comp);
+limiter=ctx.createDynamicsCompressor();limiter.threshold.value=-3;limiter.knee.value=0;limiter.ratio.value=20;limiter.attack.value=.003;limiter.release.value=.12;comp.connect(limiter);
+master=ctx.createGain();master.gain.value=.8;limiter.connect(master);
+analyser=ctx.createAnalyser();analyser.fftSize=2048;analyser.smoothingTimeConstant=.8;
+let len=ctx.sampleRate*1.5,buf=ctx.createBuffer(2,len,ctx.sampleRate);for(let c=0;c<2;c++){let a=buf.getChannelData(c);for(let i=0;i<len;i++)a[i]=(Math.random()*2-1)*Math.pow(1-i/len,3)}
+conv=ctx.createConvolver();conv.buffer=buf;revWet=ctx.createGain();revDry=ctx.createGain();revWet.gain.value=0;revDry.gain.value=1;master.connect(revDry);revDry.connect(analyser);master.connect(conv);conv.connect(revWet);revWet.connect(analyser);
+delay=ctx.createDelay(1.2);delay.delayTime.value=.28;delayWet=ctx.createGain();delayDry=ctx.createGain();let fb=ctx.createGain();fb.gain.value=.22;delayWet.gain.value=0;delayDry.gain.value=1;master.connect(delayDry);delayDry.connect(analyser);master.connect(delay);delay.connect(fb);fb.connect(delay);delay.connect(delayWet);delayWet.connect(analyser);
+analyser.connect(ctx.destination);$('engineStatus').textContent='Audio engine aktif • EQ, efek, analyzer dan limiter siap.'}
+function setWidth(v){if(!ctx)return;let w=v/100,a=(1+w)/2,b=(1-w)/2;[a,b,b,a].forEach((x,i)=>mg[i].gain.setTargetAtTime(x,ctx.currentTime,.03))}
+function slider(id,fn,display){$(id).oninput=()=>{let v=+$(id).value;fn(v);$(display).textContent=v+(id==='bass'||id==='treble'?' dB':'%')}}
+slider('bass',v=>{if(bass)bass.gain.setTargetAtTime(v,ctx.currentTime,.03)},'bassV');slider('treble',v=>{if(treble)treble.gain.setTargetAtTime(v,ctx.currentTime,.03)},'trebleV');slider('width',setWidth,'widthV');slider('reverb',v=>{if(revWet){revWet.gain.setTargetAtTime(v/100,ctx.currentTime,.04);revDry.gain.setTargetAtTime(1-v/160,ctx.currentTime,.04)}},'reverbV');slider('delay',v=>{if(delayWet){delayWet.gain.setTargetAtTime(v/100,ctx.currentTime,.04);delayDry.gain.setTargetAtTime(1-v/150,ctx.currentTime,.04)}},'delayV');slider('comp',v=>{if(comp){comp.threshold.setTargetAtTime(-10-v*.35,ctx.currentTime,.03);comp.ratio.setTargetAtTime(1+v*.09,ctx.currentTime,.03)}$('compV').textContent=v?v+'%':'OFF'},'compV');slider('volume',v=>{if(master)master.gain.setTargetAtTime(v/100,ctx.currentTime,.03)},'volumeV');
+function renderPlaylist(){let root=$('playlist'),term=$('search').value.toLowerCase();root.innerHTML='';let shown=tracks.map((t,i)=>({t,i})).filter(x=>x.t.name.toLowerCase().includes(term));$('count').textContent=tracks.length+' lagu';shown.forEach(({t,i})=>{let d=document.createElement('div');d.className='track'+(i===idx?' active':'');let b=document.createElement('button');b.textContent=i===idx&&!audio.paused?'❚❚':'▶';b.onclick=()=>playTrack(i);let n=document.createElement('span');n.className='name';n.textContent=t.name;let rm=document.createElement('button');rm.textContent='×';rm.title='Hapus dari daftar';rm.onclick=()=>{tracks.splice(i,1);if(i===idx){audio.pause();audio.removeAttribute('src');idx=-1;updateTrack()}else if(i<idx)idx--;renderPlaylist()};d.append(b,n,rm);root.append(d)})}
+function updateTrack(){let t=tracks[idx];$('current').textContent=t?t.name:'Belum ada lagu dipilih';$('meta').textContent=t?((t.file.size/1048576).toFixed(2)+' MB • '+(t.file.type||'Audio')):'Pilih file audio dari perangkat';renderPlaylist()}
+function playTrack(i){if(i<0||i>=tracks.length)return;idx=i;audio.src=tracks[i].url;audio.load();updateTrack();makeEngine();ctx.resume().then(()=>audio.play()).then(()=>{draw();$('playerStatus').textContent='Memutar: '+tracks[i].name}).catch(e=>$('playerStatus').textContent='Gagal memutar file: '+e.message)}
+$('files').onchange=e=>{Array.from(e.target.files).forEach(file=>{let url=URL.createObjectURL(file);urls.push(url);tracks.push({file,name:file.name,url})});if(idx<0&&tracks.length)idx=0;updateTrack();$('playerStatus').textContent=e.target.files.length+' file ditambahkan.';e.target.value=''};
+$('search').oninput=renderPlaylist;$('play').onclick=()=>{if(idx<0){$('playerStatus').textContent='Tambahkan file musik terlebih dahulu.';return}if(audio.paused) {makeEngine();ctx.resume().then(()=>audio.play()).then(draw).catch(()=>{})}else audio.pause()};
+$('stop').onclick=()=>{audio.pause();audio.currentTime=0};$('prev').onclick=()=>{if(tracks.length)playTrack((idx-1+tracks.length)%tracks.length)};$('next').onclick=()=>{if(tracks.length)playTrack((idx+1)%tracks.length)};
+audio.onplay=()=>{$('play').textContent='❚❚ Pause';renderPlaylist()};audio.onpause=()=>{$('play').textContent='▶ Putar';renderPlaylist()};audio.onended=()=>{if(tracks.length>1)playTrack((idx+1)%tracks.length)};audio.ontimeupdate=()=>{if(audio.duration){$('time').textContent=fmt(audio.currentTime)+' / '+fmt(audio.duration);if(!$('seek').matches(':active'))$('seek').value=audio.currentTime/audio.duration*1000}};$('seek').oninput=()=>{if(audio.duration)audio.currentTime=audio.duration*(+$('seek').value/1000)};
+function draw(){if(!analyser||audio.paused)return;let c=$('visual'),g=c.getContext('2d'),w=c.width,h=c.height,data=new Uint8Array(analyser.frequencyBinCount),wave=new Uint8Array(analyser.fftSize);analyser.getByteFrequencyData(data);analyser.getByteTimeDomainData(wave);g.fillStyle='#050a12';g.fillRect(0,0,w,h);let bars=90,step=Math.floor(data.length/bars),bw=w/bars;for(let i=0;i<bars;i++){let z=data[i*step]/255* h*.82,gr=g.createLinearGradient(0,h-z,0,h);gr.addColorStop(0,'#60a5fa');gr.addColorStop(1,'#42d6b5');g.fillStyle=gr;g.fillRect(i*bw+1,h-z,bw-2,z)}g.beginPath();g.strokeStyle='#ffffffaa';g.lineWidth=2;for(let i=0;i<wave.length;i++){let x=i/(wave.length-1)*w,y= h*.48+(wave[i]-128)/128*h*.22;i?g.lineTo(x,y):g.moveTo(x,y)}g.stroke();raf=requestAnimationFrame(draw)}
+$('bypass').onclick=()=>{eqOn=!eqOn;$('bypass').textContent=eqOn?'EQ ON':'EQ BYPASS';$('bypass').classList.toggle('primary',eqOn);filters.forEach((f,i)=>f.gain.setTargetAtTime(eqOn?bands[i]:0,ctx.currentTime,.03))};
+function setBand(i,v){bands[i]=v;let r=$('eq').children[i].querySelector('input');r.value=v;r.dispatchEvent(new Event('input'))}
+const presets=[
+{name:'Flat',b:Array(30).fill(0),bass:0,treble:0,width:100,reverb:0,delay:0,comp:0},
+{name:'Rock',b:[4,4,3,2,1,0,-1,-1,0,1,2,3,3,2,1,2,3,4,4,3,2,2,3,4,4,3,2,2,1,0],bass:1,treble:2,width:110,reverb:4,delay:0,comp:25},
+{name:'Pop',b:[-1,0,1,2,3,3,2,1,0,-1,-1,0,1,2,3,3,2,1,0,1,2,3,3,2,1,0,-1,-1,0,0],bass:0,treble:2,width:105,reverb:5,delay:0,comp:20},
+{name:'Jazz',b:[2,2,1,1,0,0,0,1,1,0,-1,-1,0,1,2,2,1,1,2,2,1,1,2,3,3,2,2,2,1,0],bass:1,treble:2,width:105,reverb:8,delay:0,comp:15},
+{name:'Dangdut',b:[4,4,3,3,2,2,1,0,-1,-1,0,2,3,3,2,1,1,2,3,3,2,2,3,3,2,1,0,0,0,-1],bass:3,treble:2,width:110,reverb:8,delay:4,comp:30},
+{name:'Reggae',b:[4,3,3,2,1,0,0,1,2,2,1,0,0,1,2,2,1,0,0,1,2,2,1,0,1,2,2,1,0,-1],bass:3,treble:0,width:115,reverb:10,delay:5,comp:20},
+{name:'EDM',b:[5,5,4,4,3,2,1,0,-1,-2,-1,0,1,2,2,1,0,1,2,3,4,4,3,3,2,2,1,1,0,0],bass:4,treble:3,width:120,reverb:5,delay:3,comp:40},
+{name:'Vocal',b:[-2,-2,-1,0,1,1,0,-1,-1,0,1,2,3,4,4,3,2,2,3,3,2,1,0,1,2,2,1,0,-1,-2],bass:-2,treble:3,width:100,reverb:8,delay:0,comp:35},
+{name:'Acoustic',b:[2,2,1,1,0,0,-1,0,1,1,1,2,2,2,1,1,1,2,2,2,1,1,2,2,2,1,1,0,0,-1],bass:1,treble:2,width:105,reverb:12,delay:2,comp:15}
 ];
-const presetObj=(a)=>({name:a[0],bands:Array.isArray(a[1])?a[1]:Array(30).fill(0),bass:a[2],treble:a[3],width:a[4],reverb:a[5],comp:a[6]});
-let custom=JSON.parse(localStorage.getItem('eqp3presets')||'[]');
-function renderPresets(){let root=$('presets');root.innerHTML='';[...builtin.map(presetObj),...custom].forEach(p=>{let b=document.createElement('button');b.textContent=p.name;b.onclick=()=>applyPreset(p);root.append(b)})}
-$('flat').onclick=()=>applyPreset(presetObj(builtin[0]));
-$('savePreset').onclick=()=>{let name=$('presetName').value.trim();if(!name){$('presetStatus').textContent='Isi nama preset terlebih dahulu.';return}custom.push({name,bands:[...values],bass:+$('bass').value,treble:+$('treble').value,width:+$('width').value,reverb:+$('reverb').value,comp:+$('comp').value});localStorage.setItem('eqp3presets',JSON.stringify(custom));$('presetName').value='';renderPresets();$('presetStatus').textContent='Preset tersimpan di perangkat ini.'};
-$('exportPreset').onclick=()=>{let blob=new Blob([JSON.stringify(custom,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='eq-project-3-presets.json';a.click();URL.revokeObjectURL(a.href)};
-$('importPreset').onchange=async e=>{try{let arr=JSON.parse(await e.target.files[0].text());if(!Array.isArray(arr))throw Error();custom=custom.concat(arr.filter(p=>p&&typeof p.name==='string'&&Array.isArray(p.bands)&&p.bands.length===30));localStorage.setItem('eqp3presets',JSON.stringify(custom));renderPresets();$('presetStatus').textContent='Preset berhasil diimpor.'}catch(err){$('presetStatus').textContent='File preset tidak valid.'}};
-$('theme').onclick=()=>{document.body.classList.toggle('light');let light=document.body.classList.contains('light');document.body.style.background=light?'#eaf0f8':'radial-gradient(circle at 15% 0%,#17294a 0,#080d18 42%)';document.body.style.color=light?'#101827':'#edf4ff'};
-$('downloadHelp').onclick=()=>alert('Pilih musik → Putar → atur 30 band EQ atau pilih preset. Stereo Width, Reverb, Compressor, dan Volume tersedia di Audio Enhancer. Preset tersimpan di browser perangkat ini; gunakan Ekspor untuk membuat salinan.');
-buildBands();renderPresets();
+let custom=JSON.parse(localStorage.getItem('eqp4custom')||'[]');
+function apply(p){p.b.forEach((v,i)=>setBand(i,v));[['bass',p.bass],['treble',p.treble],['width',p.width],['reverb',p.reverb],['delay',p.delay||0],['comp',p.comp]].forEach(([id,v])=>{$(id).value=v;$(id).dispatchEvent(new Event('input'))});$('presetStatus').textContent='Preset diterapkan: '+p.name}
+function renderPresets(){let root=$('presets');root.innerHTML='';[...presets,...custom].forEach(p=>{let b=document.createElement('button');b.textContent=p.name;b.onclick=()=>apply(p);root.append(b)})}
+$('flat').onclick=()=>apply(presets[0]);$('save').onclick=()=>{let name=$('presetName').value.trim();if(!name){$('presetStatus').textContent='Masukkan nama preset.';return}custom.push({name,b:[...bands],bass:+$('bass').value,treble:+$('treble').value,width:+$('width').value,reverb:+$('reverb').value,delay:+$('delay').value,comp:+$('comp').value});localStorage.setItem('eqp4custom',JSON.stringify(custom));$('presetName').value='';renderPresets();$('presetStatus').textContent='Preset disimpan pada browser ini.'};
+$('export').onclick=()=>{let a=document.createElement('a'),u=URL.createObjectURL(new Blob([JSON.stringify(custom,null,2)],{type:'application/json'}));a.href=u;a.download='eq-project-4-presets.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};
+$('import').onchange=async e=>{try{let a=JSON.parse(await e.target.files[0].text());if(!Array.isArray(a))throw 0;custom=custom.concat(a.filter(p=>p&&typeof p.name==='string'&&Array.isArray(p.b)&&p.b.length===30));localStorage.setItem('eqp4custom',JSON.stringify(custom));renderPresets();$('presetStatus').textContent='Preset berhasil diimpor.'}catch(_){$('presetStatus').textContent='File preset tidak valid.'}};
+$('clear').onclick=()=>{if(!confirm('Kosongkan seluruh daftar lagu?'))return;audio.pause();tracks=[];idx=-1;updateTrack();$('playerStatus').textContent='Playlist dikosongkan.'};
+$('theme').onclick=()=>{let light=document.body.dataset.light!=='1';document.body.dataset.light=light?'1':'0';document.body.style.background=light?'#eaf0f8':'radial-gradient(circle at 15% 0,#1a3155 0,#080d18 48%)';document.body.style.color=light?'#152238':'#edf4ff'};
+$('helpBtn').onclick=()=>alert('1. Tambah Musik untuk memilih beberapa file audio. 2. Pilih lagu di playlist atau tekan Putar. 3. Atur 30-band EQ dan efek. 4. Simpan preset dengan nama sendiri. 5. Ekspor preset sebagai cadangan. File musik tetap berada di perangkat; playlist akan dibangun ulang saat halaman dimuat kembali.');
+buildEQ();renderPresets();
+window.addEventListener('pagehide',()=>{urls.forEach(u=>URL.revokeObjectURL(u));if(raf)cancelAnimationFrame(raf)});
 })();
-</script>
-</body></html>
+</script></body></html>
